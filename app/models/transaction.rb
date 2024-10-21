@@ -1,6 +1,7 @@
 class Transaction < ApplicationRecord
-  belongs_to :source_wallet
-  belongs_to :target_wallet
+  belongs_to :source_wallet, class_name: "Wallet"
+  belongs_to :target_wallet, class_name: "Wallet"
+  belongs_to :executed_by, class_name: "User", foreign_key: "user_id"
   enum transaction_type: { credit: 0, debit: 1 }
 
   validates :amount, :transaction_type, presence: true

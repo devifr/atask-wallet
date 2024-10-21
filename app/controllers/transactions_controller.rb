@@ -1,9 +1,7 @@
 class TransactionsController < ApplicationController
-  before_action :set_wallet
-
   def create
     ActiveRecord::Base.transaction do
-      transaction = Transaction.new(transaction_params)
+      transaction = current_user.transactions.new(transaction_params)
       assign_wallets(transaction)
 
 
