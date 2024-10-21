@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_10_21_022841) do
+ActiveRecord::Schema[7.2].define(version: 2024_10_21_093143) do
   create_table "stocks", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -40,6 +40,8 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_21_022841) do
     t.string "password_digest"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "team_id", null: false
+    t.index ["team_id"], name: "index_users_on_team_id"
   end
 
   create_table "wallets", force: :cascade do |t|
@@ -53,4 +55,5 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_21_022841) do
 
   add_foreign_key "transactions", "source_wallets"
   add_foreign_key "transactions", "target_wallets"
+  add_foreign_key "users", "teams"
 end

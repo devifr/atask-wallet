@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   has_one :wallet, as: :walletable
+  has_one :team
 
   # Include bcrypt functionality
   has_secure_password
