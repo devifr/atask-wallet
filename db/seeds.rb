@@ -7,3 +7,7 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+require Rails.root.join("db/seeds/users.rb")
+require Rails.root.join("db/seeds/teams.rb")
+require Rails.root.join("db/seeds/stocks.rb")
+require Rails.root.join("db/seeds/wallet.rb")
