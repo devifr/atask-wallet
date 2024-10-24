@@ -11,6 +11,7 @@ class WalletsController < ApplicationController
   end
 
   def create
+    return render json: @wallet, status: :ok if has_wallet?
     @wallet = Wallet.new(wallet_params)
 
     if @wallet.save
@@ -21,7 +22,8 @@ class WalletsController < ApplicationController
   end
 
   def update
-    if @wallet.update(wallet_params)
+    debugger
+    if @wallet.update(balance: wallet_params[:balance])
       render json: @wallet
     else
       render json: @wallet.errors, status: :unprocessable_entity
@@ -33,15 +35,28 @@ class WalletsController < ApplicationController
     head :no_content
   end
 
+  def my_wallet
+    @wallet = current_user.wallet
+    if @wallet
+      render json: @wallet, status: :ok
+    else
+      render json: { error: "Wallet not found" }, status: :not_found
+    end
+  end
+
   private
 
   def set_wallet
     @wallet = Wallet.find(params[:id])
   rescue ActiveRecord::RecordNotFound
-    render json: { error: 'Wallet not found' }, status: :not_found
+    render json: { error: "Wallet not found" }, status: :not_found
   end
 
   def wallet_params
     params.require(:wallet).permit(:balance, :walletable_type, :walletable_id)
+  end
+
+  def has_wallet?
+    @wallet = Wallet.find_by(walletable_type: params[:wallet][:walletable_type], walletable_id: params[:wallet][:walletable_id])
   end
 end
