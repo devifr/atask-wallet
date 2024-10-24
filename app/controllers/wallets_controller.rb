@@ -22,7 +22,6 @@ class WalletsController < ApplicationController
   end
 
   def update
-    debugger
     if @wallet.update(balance: wallet_params[:balance])
       render json: @wallet
     else
