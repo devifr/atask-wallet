@@ -15,7 +15,7 @@
 > git clone https://github.com/devifr/atask-wallet.git
 
 **2. Go to application folder**
-> cd atask_wallet_api
+> cd atask-wallet
 
 **3. Bundle install**
 > bundle install
@@ -33,4 +33,4 @@
 > rails s
 
 **8. You can run rspec test**
-> bundle exec rspec spec/**/*
+> bundle exec rspec ./spec
